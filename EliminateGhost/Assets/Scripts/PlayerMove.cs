@@ -12,7 +12,8 @@ public class PlayerMove : MonoBehaviour
 
     //create weapone
     public GameObject prefabWeapon;
-    
+    public bool check = true;
+
     void Start()
     {
         tr = GetComponent<Transform>();
@@ -44,11 +45,18 @@ public class PlayerMove : MonoBehaviour
         }
 
         // Weapon 생성
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)&&check)
         {
-            Instantiate(prefabWeapon, new Vector2(tr.position.x + 1.65f, tr.position.y + 0.66f), Quaternion.identity);
-
+            check = false;
+            StartCoroutine(ShootWeapon());
         }
 
+    }
+
+    IEnumerator ShootWeapon()
+    {
+        Instantiate(prefabWeapon, new Vector2(tr.position.x + 1.65f, tr.position.y + 0.66f), Quaternion.identity);
+        yield return new WaitForSeconds(0.5f);
+        check = true;
     }
 }
