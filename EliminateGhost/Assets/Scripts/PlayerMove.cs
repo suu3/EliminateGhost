@@ -6,9 +6,13 @@ public class PlayerMove : MonoBehaviour
 {
     public float speed;
     
+    //move
     Transform tr;
     float limitPointMin = -6.02f;
     float limitPointMax = 6.02f;
+
+    //jump
+    Rigidbody2D rigid;
 
     //create weapone
     public GameObject prefabWeapon;
@@ -17,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         tr = GetComponent<Transform>();
+        rigid = GetComponent<Rigidbody2D>();
         tr.position = new Vector2(-5.74f, -1.88f);
     }
 
@@ -43,6 +48,14 @@ public class PlayerMove : MonoBehaviour
         {
             tr.position = new Vector2(limitPointMax, tr.position.y);
         }
+
+        //jump
+        if(rigid.velocity.y == 0 && Input.GetKey(KeyCode.UpArrow))
+        {
+            rigid.velocity = Vector2.zero;
+            rigid.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+        }
+
 
         // Weapon 생성
         if (Input.GetKey(KeyCode.Space)&&check)
