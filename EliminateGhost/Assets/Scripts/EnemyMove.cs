@@ -6,6 +6,7 @@ public class EnemyMove : MonoBehaviour
 {
 
     Transform tr;
+    
     public float speed;
 
     void Start()
@@ -28,7 +29,11 @@ public class EnemyMove : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(this.gameObject);
-        Destroy(collision.gameObject);
+        if (collision.gameObject.name == "Weapon(Clone)")
+        {
+            GameObject.Find("GameManager").GetComponent<Score>().score += 10;
+            Destroy(this.gameObject);
+            Destroy(collision.gameObject);
+        }
     }
 }
