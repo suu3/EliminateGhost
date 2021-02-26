@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float speed;
-    public int count = 1;
-
     //move
+    public float speed;
     Transform tr;
     float limitPointMin = -6.02f;
     float limitPointMax = 6.02f;
@@ -15,15 +13,20 @@ public class PlayerMove : MonoBehaviour
     //jump
     Rigidbody2D rigid;
 
-    //create weapone
+    //create weapon
     public GameObject prefabWeapon;
     public bool check = true;
+
+    //game over
+    public GameObject GameOver;
+    public int count = 1;
 
     void Start()
     {
         tr = GetComponent<Transform>();
         rigid = GetComponent<Rigidbody2D>();
         tr.position = new Vector2(-5.74f, -1.88f);
+        GameOver.SetActive(false);
     }
 
     // Update is called once per frame
@@ -74,7 +77,7 @@ public class PlayerMove : MonoBehaviour
         check = true;
     }
 
-    //충돌
+    //Life
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (count == 1)
@@ -95,6 +98,10 @@ public class PlayerMove : MonoBehaviour
             Destroy(GameObject.Find("Life1"));
             count += 1;
         }
-        
+        else if (count == 4)
+        {
+            GameOver.SetActive(true);
+            Application.Quit();
+        }
     }
 }
