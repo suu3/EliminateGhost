@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float speed;
-    
+    public int count = 1;
+
     //move
     Transform tr;
     float limitPointMin = -6.02f;
@@ -71,5 +72,29 @@ public class PlayerMove : MonoBehaviour
         Instantiate(prefabWeapon, new Vector2(tr.position.x + 1.65f, tr.position.y + 0.66f), Quaternion.identity);
         yield return new WaitForSeconds(0.5f);
         check = true;
+    }
+
+    //충돌
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (count == 1)
+        {
+            Destroy(collision.gameObject);
+            Destroy(GameObject.Find("Life3"));
+            count += 1;
+        }
+        else if (count == 2)
+        {
+            Destroy(collision.gameObject);
+            Destroy(GameObject.Find("Life2"));
+            count += 1;
+        }
+        else if (count == 3)
+        {
+            Destroy(collision.gameObject);
+            Destroy(GameObject.Find("Life1"));
+            count += 1;
+        }
+        
     }
 }
