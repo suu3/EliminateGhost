@@ -1,6 +1,6 @@
-# EliminateGhost (2021.1)
+# EliminateGhost (2021.1) (Unity)
   간단히 life, score, 발사를 구현해 본 shooting 게임 습작.  
-  책 보고 만든 너무 기본적인 슈팅게임이라 private로 유지하다가 도트 찍었던게 아까워서... ㅎㅎ
+  책 보고 만든 너무 기본적인 슈팅게임이라 private로 유지하다가 리소스들 도트 찍었던게 아까워서... ㅎㅎ
   
   ### shoot, jump, score
   <img src="img/1.gif">  
